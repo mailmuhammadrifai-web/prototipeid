@@ -1,0 +1,1415 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prototipe.id | Jasa Pembuatan Prototipe UI/UX Berkualitas & Terjangkau</title>
+    <meta name="description" content="Studio desain UI/UX profesional untuk mahasiswa, startup, dan UMKM. Ubah ide project menjadi prototipe aplikasi berkualitas tinggi dengan harga terjangkau.">
+    
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+
+    <style>
+        :root {
+            --bg-soft: #c1dffa;
+            --bg-dark: #0f172a;
+            --primary: #4f46e5;
+            --primary-light: #818cf8;
+            --secondary: #f59e0b;
+            --accent: #ec4899;
+            --success: #10b981;
+            --white: #ffffff;
+            --text-main: #1e293b;
+            --text-light: #64748b;
+            --gray-light: #f1f5f9;
+            --shadow: rgba(0, 0, 0, 0.08);
+            --shadow-lg: rgba(0, 0, 0, 0.15);
+            --glass: rgba(255, 255, 255, 0.85);
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        body {
+            background-color: var(--bg-soft);
+            color: var(--text-main);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section {
+            padding: 100px 0;
+        }
+
+        .section-title {
+            font-size: 2.8rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            text-align: center;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 60px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 16px 35px;
+            border-radius: 12px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            box-shadow: 0 10px 25px rgba(79, 70, 229, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(79, 70, 229, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(79, 70, 229, 0.05);
+            transform: translateY(-5px);
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 6px 15px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .badge-popular {
+            background: linear-gradient(135deg, #f59e0b, #fbbf24);
+            color: white;
+        }
+
+        .badge-new {
+            background: linear-gradient(135deg, #ec4899, #f472b6);
+            color: white;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 0;
+            z-index: 1000;
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            transition: var(--transition);
+        }
+
+        nav.scrolled {
+            padding: 15px 0;
+            box-shadow: 0 10px 30px var(--shadow);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            text-decoration: none;
+            color: var(--bg-dark);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo-dot {
+            color: var(--primary);
+        }
+
+        .nav-cta {
+            font-size: 0.9rem;
+            padding: 12px 25px;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding-top: 180px;
+            padding-bottom: 100px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 50%, rgba(79, 70, 229, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(236, 72, 153, 0.1) 0%, transparent 50%);
+            z-index: -1;
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 25px;
+            color: var(--bg-dark);
+        }
+
+        .hero-text p {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            margin-bottom: 40px;
+            max-width: 90%;
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .hero-visual {
+            position: relative;
+        }
+
+        .mockup-container {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            border-radius: 30px;
+            overflow: hidden;
+            box-shadow: 0 30px 60px var(--shadow-lg);
+            transform: perspective(1000px) rotateY(-10deg) rotateX(5deg);
+            transition: var(--transition);
+        }
+
+        .mockup-container:hover {
+            transform: perspective(1000px) rotateY(0deg) rotateX(0deg);
+        }
+
+        .mockup-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .floating-shapes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-light), var(--accent));
+            opacity: 0.1;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .shape:nth-child(1) {
+            width: 80px;
+            height: 80px;
+            top: -30px;
+            right: -30px;
+            animation-delay: 0s;
+        }
+
+        .shape:nth-child(2) {
+            width: 60px;
+            height: 60px;
+            bottom: 40px;
+            left: -20px;
+            animation-delay: 1s;
+        }
+
+        .shape:nth-child(3) {
+            width: 40px;
+            height: 40px;
+            top: 50%;
+            right: 10%;
+            animation-delay: 2s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* Problem Section */
+        .problem-section {
+            background-color: var(--white);
+            border-radius: 40px;
+            padding: 80px 60px;
+            box-shadow: 0 20px 50px var(--shadow);
+            margin-top: 50px;
+        }
+
+        .problem-title {
+            text-align: center;
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 40px;
+            color: var(--bg-dark);
+        }
+
+        .problem-list {
+            list-style: none;
+            margin: 40px 0;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .problem-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            padding: 20px;
+            background: var(--gray-light);
+            border-radius: 15px;
+            transition: var(--transition);
+        }
+
+        .problem-list li:hover {
+            transform: translateY(-5px);
+            background: rgba(239, 68, 68, 0.05);
+        }
+
+        .problem-icon {
+            color: #ef4444;
+            font-size: 1.2rem;
+            margin-top: 3px;
+        }
+
+        /* Price Comparison */
+        .price-comparison {
+            background: linear-gradient(135deg, var(--bg-dark), #1e293b);
+            color: white;
+            padding: 50px;
+            border-radius: 30px;
+            text-align: center;
+            margin-top: 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .price-comparison::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 30px 30px;
+            animation: moveBackground 20s linear infinite;
+            z-index: 0;
+        }
+
+        @keyframes moveBackground {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(30px, 30px); }
+        }
+
+        .price-comparison > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .old-price {
+            font-size: 2.2rem;
+            text-decoration: line-through;
+            color: #cbd5e1;
+            font-weight: 600;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .new-price {
+            font-size: 3.5rem;
+            color: var(--success);
+            font-weight: 800;
+            display: block;
+            margin: 20px 0;
+            text-shadow: 0 5px 15px rgba(16, 185, 129, 0.3);
+        }
+
+        /* Pricing Section */
+        .pricing-container {
+            position: relative;
+            margin-top: 60px;
+        }
+
+        .pricing-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .pricing-tab {
+            padding: 12px 25px;
+            background: var(--white);
+            border: 2px solid var(--gray-light);
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .pricing-tab.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .pricing-tab:hover:not(.active) {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .price-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 40px 30px;
+            box-shadow: 0 15px 35px var(--shadow);
+            transition: var(--transition);
+            position: relative;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .price-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 25px 50px var(--shadow-lg);
+        }
+
+        .price-card.featured {
+            border: 3px solid var(--primary);
+            transform: scale(1.05);
+            z-index: 2;
+        }
+
+        .price-card.featured:hover {
+            transform: scale(1.05) translateY(-15px);
+        }
+
+        .price-card.enterprise {
+            border: 3px solid var(--accent);
+        }
+
+        .price-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .price-name {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--bg-dark);
+            margin-bottom: 10px;
+        }
+
+        .price-amount {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 5px;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+        }
+
+        .price-currency {
+            font-size: 1.5rem;
+            margin-top: 10px;
+            margin-right: 5px;
+        }
+
+        .price-value {
+            font-size: 3.5rem;
+            line-height: 1;
+        }
+
+        .price-period {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .price-features {
+            list-style: none;
+            margin-bottom: 40px;
+            flex-grow: 1;
+        }
+
+        .price-features li {
+            padding: 12px 0;
+            border-bottom: 1px solid #f1f5f9;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .price-features li i {
+            color: var(--success);
+        }
+
+        .price-features li.disabled {
+            color: var(--text-light);
+        }
+
+        .price-features li.disabled i {
+            color: var(--text-light);
+        }
+
+        .price-btn {
+            width: 100%;
+            margin-top: auto;
+        }
+
+        /* Portfolio */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .portfolio-item {
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            height: 300px;
+            box-shadow: 0 15px 30px var(--shadow);
+            transition: var(--transition);
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px var(--shadow-lg);
+        }
+
+        .portfolio-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s ease;
+        }
+
+        .portfolio-item:hover .portfolio-img {
+            transform: scale(1.1);
+        }
+
+        .portfolio-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 30px;
+            background: linear-gradient(to top, rgba(15, 23, 42, 0.9), transparent);
+            color: white;
+            transform: translateY(20px);
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .portfolio-item:hover .portfolio-overlay {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* FAQ */
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: var(--white);
+            border-radius: 15px;
+            margin-bottom: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px var(--shadow);
+            transition: var(--transition);
+        }
+
+        .faq-item.active {
+            box-shadow: 0 10px 25px var(--shadow-lg);
+        }
+
+        .faq-question {
+            padding: 25px 30px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-answer {
+            padding: 0 30px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease, padding 0.5s ease;
+        }
+
+        .faq-item.active .faq-answer {
+            padding: 0 30px 30px;
+            max-height: 300px;
+        }
+
+        .faq-icon {
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(45deg);
+        }
+
+        /* Stats */
+        .stats-section {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            padding: 80px 0;
+            border-radius: 40px;
+            margin: 85px 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            text-align: center;
+        }
+
+        .stat-item h3 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .stat-item p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-dark);
+            color: white;
+            padding: 80px 0 40px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 50px;
+            margin-bottom: 60px;
+        }
+
+        .footer-logo {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            color: white;
+            text-decoration: none;
+        }
+
+        .footer-links h4 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: #cbd5e1;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+
+        /* WhatsApp Float */
+        .wa-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 70px;
+            height: 70px;
+            background: #25d366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
+            transition: var(--transition);
+            animation: pulse 2s infinite;
+        }
+
+        .wa-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 15px 35px rgba(37, 211, 102, 0.5);
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+
+        .wa-float img {
+            width: 35px;
+            height: 35px;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 40px;
+            }
+            
+            .hero-text p {
+                max-width: 100%;
+            }
+            
+            .problem-list {
+                grid-template-columns: 1fr;
+            }
+            
+            .mockup-container {
+                transform: none;
+            }
+            
+            .pricing-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+            
+            .price-card.featured {
+                transform: none;
+            }
+            
+            .price-card.featured:hover {
+                transform: translateY(-15px);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 2.2rem;
+            }
+            
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+            
+            .problem-section {
+                padding: 40px 25px;
+            }
+            
+            .price-comparison {
+                padding: 30px 20px;
+            }
+            
+            .section {
+                padding: 70px 0;
+            }
+            
+            .pricing-tabs {
+                gap: 5px;
+            }
+            
+            .pricing-tab {
+                padding: 10px 15px;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-btns {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .hero-btns .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .price-card.featured {
+                transform: none;
+            }
+            
+            .price-card.featured:hover {
+                transform: translateY(-15px);
+            }
+            
+            .pricing-tabs {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .pricing-tab {
+                width: 100%;
+                max-width: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="container nav-container">
+            <a href="#" class="logo">
+                <i class="fas fa-palette"></i>
+                PROTOTIPE<span class="logo-dot">.</span>ID
+            </a>
+            <a href="#pricing" class="btn btn-primary nav-cta">
+                <i class="fas fa-tags"></i> LIHAT HARGA
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero section">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text" data-aos="fade-up" data-aos-delay="100">
+                    <h1>Ubah Ide Project Jadi <span class="animate__animated animate__pulse animate__infinite" style="color: var(--primary); display: inline-block;">Visual Nyata</span></h1>
+                    <p>Studio desain UI/UX profesional yang membantu mahasiswa, startup, dan UMKM memiliki prototipe aplikasi berkualitas tinggi tanpa biaya mahal. Lebih dari 500+ proyek berhasil diselesaikan.</p>
+                    <div class="hero-btns">
+                        <a href="#pricing" class="btn btn-primary">
+                            <i class="fas fa-rocket"></i> Mulai Dari Rp 89rb
+                        </a>
+                        <a href="#portfolio" class="btn btn-secondary">
+                            <i class="fas fa-images"></i> Lihat Portofolio
+                        </a>
+                    </div>
+                    <div style="margin-top: 40px; display: flex; gap: 30px; flex-wrap: wrap;">
+                        <div>
+                            <h3 style="color: var(--primary); font-size: 2rem; margin-bottom: 5px;">500+</h3>
+                            <p style="font-size: 0.9rem;">Proyek Selesai</p>
+                        </div>
+                        <div>
+                            <h3 style="color: var(--primary); font-size: 2rem; margin-bottom: 5px;">98%</h3>
+                            <p style="font-size: 0.9rem;">Kepuasan Klien</p>
+                        </div>
+                        <div>
+                            <h3 style="color: var(--primary); font-size: 2rem; margin-bottom: 5px;">24/7</h3>
+                            <p style="font-size: 0.9rem;">Support</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-visual" data-aos="fade-left" data-aos-delay="300">
+                    <div class="mockup-container">
+                        <img src="https://images.unsplash.com/photo-1558655146-364adaf1fcc9?q=80&w=1000" alt="UI/UX Design Mockup" class="mockup-img">
+                        <div class="floating-shapes">
+                            <div class="shape"></div>
+                            <div class="shape"></div>
+                            <div class="shape"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section id="problem" class="section">
+        <div class="container">
+            <h2 class="section-title">Masalah yang Sering Dihadapi?</h2>
+            <p class="section-subtitle">Kami memahami tantangan yang sering dihadapi oleh mahasiswa, startup, dan UMKM dalam mengembangkan ide menjadi prototipe aplikasi yang menarik.</p>
+            
+            <div class="problem-section" data-aos="fade-up">
+                <h3 class="problem-title">Apakah kamu mengalami ini?</h3>
+                
+                <ul class="problem-list">
+                    <li>
+                        <div class="problem-icon"><i class="fas fa-times-circle"></i></div>
+                        <div>
+                            <h4>Kesulitan Membuat Prototipe yang Menarik</h4>
+                            <p>Untuk keperluan lomba, presentasi, atau tugas akhir.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="problem-icon"><i class="fas fa-times-circle"></i></div>
+                        <div>
+                            <h4>Waktu dan Sumber Daya Terbatas</h4>
+                            <p>Tidak punya waktu untuk belajar desain dan prototyping dari nol.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="problem-icon"><i class="fas fa-times-circle"></i></div>
+                        <div>
+                            <h4>Kurang Pengetahuan Tools</h4>
+                            <p>Bingung dengan software dan tools prototyping yang tepat.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="problem-icon"><i class="fas fa-times-circle"></i></div>
+                        <div>
+                            <h4>Sulit Menterjemahkan Ide</h4>
+                            <p>Kesulitan mengubah ide project akhir menjadi prototipe yang keren.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="problem-icon"><i class="fas fa-times-circle"></i></div>
+                        <div>
+                            <h4>Validasi Ide Bisnis</h4>
+                            <p>Kesulitan memvalidasi ide bisnis sebelum membangun produk final.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="problem-icon"><i class="fas fa-times-circle"></i></div>
+                        <div>
+                            <h4>Biaya Pengembangan Tinggi</h4>
+                            <p>Biaya pembuatan aplikasi terlalu mahal untuk tahap awal.</p>
+                        </div>
+                    </li>
+                </ul>
+                
+                <div style="text-align: center; margin-top: 40px;">
+                    <p style="font-weight: 700; font-size: 1.3rem; color: var(--primary);">Tenang! Kami punya solusinya.</p>
+                    <p style="font-size: 1.1rem; margin-top: 10px;">Dengan prototipe yang baik, kamu bisa menguji ide, menarik investor, dan memenangkan lomba dengan lebih mudah.</p>
+                </div>
+                
+                <div class="price-comparison" data-aos="zoom-in">
+                    <h3 style="font-size: 1.8rem; margin-bottom: 20px;">Perbandingan Harga</h3>
+                    <p style="margin-bottom: 20px;">Biasanya, biaya jasa pembuatan prototipe yang perlu kamu keluarkan adalah...</p>
+                    <span class="old-price">Rp 700.000 - Rp 3.500.000</span>
+                    <p style="margin: 20px 0; font-size: 1.2rem;">😭 Mahal banget, kan?</p>
+                    
+                    <div style="background: var(--white); color: var(--bg-dark); padding: 30px; border-radius: 20px; margin-top: 30px;">
+                        <h4 style="color: var(--primary); font-size: 1.5rem; margin-bottom: 15px;">Di Prototipe.id Harganya Jauh Lebih Terjangkau!</h4>
+                        <p>Kami membuat prototipe berkualitas dengan harga yang ramah di kantong.</p>
+                        <span class="new-price">Rp 89.000</span>
+                        <p style="font-weight: 600;">Mulai dari sini! Walaupun murah, kami menjamin kualitas terbaik untuk project kamu.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item" data-aos="fade-up" data-aos-delay="100">
+                    <h3>500+</h3>
+                    <p>Proyek Berhasil</p>
+                </div>
+                <div class="stat-item" data-aos="fade-up" data-aos-delay="200">
+                    <h3>98%</h3>
+                    <p>Kepuasan Klien</p>
+                </div>
+                <div class="stat-item" data-aos="fade-up" data-aos-delay="300">
+                    <h3>2023</h3>
+                    <p>Sejak Lama Berdiri</p>
+                </div>
+                <div class="stat-item" data-aos="fade-up" data-aos-delay="400">
+                    <h3>24/7</h3>
+                    <p>Support Klien</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="section" style="background: var(--white);">
+        <div class="container">
+            <h2 class="section-title">Portofolio Kami</h2>
+            <p class="section-subtitle">Beberapa contoh hasil kerja kami yang telah membantu klien mewujudkan ide mereka menjadi prototipe yang menarik dan fungsional.</p>
+            
+            <div class="portfolio-grid">
+                <div class="portfolio-item" data-aos="fade-up">
+                    <img src="1.png" alt="Aplikasi E-Learning" class="portfolio-img">
+                    <div class="portfolio-overlay">
+                        <h3>Aplikasi Bersih Bersih</h3>
+                        <p>UI/UX Design untuk platform jasa bersih online</p>
+                    </div>
+                </div>
+                <div class="portfolio-item" data-aos="fade-up" data-aos-delay="100">
+                    <img src="2.png" alt="Platform UMKM" class="portfolio-img">
+                    <div class="portfolio-overlay">
+                        <h3>Platform Lingkungan</h3>
+                        <p>Mobile app untuk bidang lingkungan</p>
+                    </div>
+                </div>
+                <div class="portfolio-item" data-aos="fade-up" data-aos-delay="200">
+                    <img src="3.png" alt="Dashboard Analytics" class="portfolio-img">
+                    <div class="portfolio-overlay">
+                        <h3>Dashboard Komunitas</h3>
+                        <p>Web app untuk komunitas urban farming di Bandung</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 50px;">
+                <p style="color: var(--text-light); font-size: 1.1rem;">Telah dipercaya oleh <strong>500+ klien</strong> di seluruh Indonesia sejak 2023</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="section">
+        <div class="container">
+            <h2 class="section-title">Pilih Paket Investasimu</h2>
+            <p class="section-subtitle">Investasi kecil untuk hasil yang maksimal. Pilih paket yang sesuai dengan kebutuhan dan budget kamu. Sekarang dengan 8 pilihan paket!</p>
+            
+            <!-- Pricing Tabs -->
+            <div class="pricing-tabs">
+                <div class="pricing-tab active" data-category="all">Semua Paket</div>
+                <div class="pricing-tab" data-category="basic">Paket Dasar</div>
+                <div class="pricing-tab" data-category="advanced">Paket Lanjutan</div>
+                <div class="pricing-tab" data-category="premium">Paket Premium</div>
+            </div>
+            
+            <!-- All Packages Grid -->
+            <div class="pricing-container">
+                <div class="pricing-grid" id="all-packages">
+                    <!-- Paket Starter (Baru) -->
+                    <div class="price-card" data-aos="fade-up" data-aos-delay="100" data-category="basic">
+                        <div class="price-header">
+                            <h3 class="price-name">Starter</h3>
+                            <div class="price-amount">
+                                <span class="price-currency">Rp</span>
+                                <span class="price-value">49</span>
+                            </div>
+                            <div class="price-period">ribu / project</div>
+                        </div>
+                        <ul class="price-features">
+                            <li><i class="fas fa-check-circle"></i> 3-5 Slide Presentasi</li>
+                            <li><i class="fas fa-check-circle"></i> Wireframe Sederhana</li>
+                            <li><i class="fas fa-check-circle"></i> 1x Revisi Minor</li>
+                            <li><i class="fas fa-check-circle"></i> File PNG/PDF</li>
+                            <li class="disabled"><i class="fas fa-times-circle"></i> Tidak Include Source File</li>
+                        </ul>
+                        <a href="https://wa.me/6281524187245?text=Halo,%20saya%20tertarik%20dengan%20Paket%20Starter%20seharga%20Rp%2049.000" class="btn btn-primary price-btn" target="_blank">Pilih Paket</a>
+                    </div>
+                    
+                    <!-- Paket Red -->
+                    <div class="price-card" data-aos="fade-up" data-aos-delay="150" data-category="basic">
+                        <div class="price-header">
+                            <h3 class="price-name">Red</h3>
+                            <div class="price-amount">
+                                <span class="price-currency">Rp</span>
+                                <span class="price-value">89</span>
+                            </div>
+                            <div class="price-period">ribu / project</div>
+                        </div>
+                        <ul class="price-features">
+                            <li><i class="fas fa-check-circle"></i> 6-10 Slide</li>
+                            <li><i class="fas fa-check-circle"></i> Canva Based</li>
+                            <li><i class="fas fa-check-circle"></i> Revisi 1x</li>
+                            <li><i class="fas fa-check-circle"></i> Garansi Sesuai Brief</li>
+                            <li><i class="fas fa-check-circle"></i> Support via WhatsApp</li>
+                        </ul>
+                        <a href="https://wa.me/6281524187245?text=Halo,%20saya%20tertarik%20dengan%20Paket%20Red%20seharga%20Rp%2089.000" class="btn btn-primary price-btn" target="_blank">Pilih Paket</a>
+                    </div>
+                    
+                    <!-- Paket Basic -->
+                    <div class="price-card" data-aos="fade-up" data-aos-delay="200" data-category="basic">
+                        <div class="price-header">
+                            <h3 class="price-name">Basic</h3>
+                            <div class="price-amount">
+                                <span class="price-currency">Rp</span>
+                                <span class="price-value">149</span>
+                            </div>
+                            <div class="price-period">ribu / project</div>
+                        </div>
+                        <ul class="price-features">
+                            <li><i class="fas fa-check-circle"></i> 11-15 Slide</li>
+                            <li><i class="fas fa-check-circle"></i> Figma Source File</li>
+                            <li><i class="fas fa-check-circle"></i> Revisi 2x</li>
+                            <li><i class="fas fa-check-circle"></i> Garansi Kualitas</li>
+                            <li><i class="fas fa-check-circle"></i> Konsultasi Gratis</li>
+                        </ul>
+                        <a href="https://wa.me/6281524187245?text=Halo,%20saya%20tertarik%20dengan%20Paket%20Basic%20seharga%20Rp%20129.000" class="btn btn-primary price-btn" target="_blank">Pilih Paket</a>
+                    </div>
+                    
+                    <!-- Paket Silver (Baru) -->
+                    <div class="price-card" data-aos="fade-up" data-aos-delay="250" data-category="advanced">
+                        <div class="price-header">
+                            <div class="badge badge-new" style="position: absolute; top: -10px; left: 50%; transform: translateX(-50%);">BARU</div>
+                            <h3 class="price-name">Silver</h3>
+                            <div class="price-amount">
+                                <span class="price-currency">Rp</span>
+                                <span class="price-value">199</span>
+                            </div>
+                            <div class="price-period">ribu / project</div>
+                        </div>
+                        <ul class="price-features">
+                            <li><i class="fas fa-check-circle"></i> 16-20 Slide</li>
+                            <li><i class="fas fa-check-circle"></i> Prototype Interaktif</li>
+                            <li><i class="fas fa-check-circle"></i> Revisi 3x</li>
+                            <li><i class="fas fa-check-circle"></i> Responsive Design</li>
+                            <li><i class="fas fa-check-circle"></i> Export untuk Web & Mobile</li>
+                        </ul>
+                        <a href="https://wa.me/6281524187245?text=Halo,%20saya%20tertarik%20dengan%20Paket%20Silver%20seharga%20Rp%20199.000" class="btn btn-primary price-btn" target="_blank">Pilih Paket</a>
+                    </div>
+                    
+                    <!-- Paket Standard -->
+                    <div class="price-card featured" data-aos="fade-up" data-aos-delay="300" data-category="advanced">
+                        <div class="badge badge-popular" style="position: absolute; top: -10px; left: 50%; transform: translateX(-50%);">TERLARIS</div>
+                        <div class="price-header">
+                            <h3 class="price-name">Standard</h3>
+                            <div class="price-amount">
+                                <span class="price-currency">Rp</span>
+                                <span class="price-value">289</span>
+                            </div>
+                            <div class="price-period">ribu / project</div>
+                        </div>
+                        <ul class="price-features">
+                            <li><i class="fas fa-check-circle"></i> 21-30 Slide</li>
+                            <li><i class="fas fa-check-circle"></i> Full Prototype Klik</li>
+                            <li><i class="fas fa-check-circle"></i> Konsultasi Alur</li>
+                            <li><i class="fas fa-check-circle"></i> Garansi Puas</li>
+                            <li><i class="fas fa-check-circle"></i> Prioritas Pengerjaan</li>
+                        </ul>
+                        <a href="https://wa.me/6281524187245?text=Halo,%20saya%20tertarik%20dengan%20Paket%20Standard%20seharga%20Rp%20289.000" class="btn btn-primary price-btn" target="_blank">Pilih Paket</a>
+                    </div>
+                    
+                    <!-- Paket Gold (Baru) -->
+                    <div class="price-card" data-aos="fade-up" data-aos-delay="350" data-category="premium">
+                        <div class="price-header">
+                            <div class="badge badge-new" style="position: absolute; top: -10px; left: 50%; transform: translateX(-50%);">BARU</div>
+                            <h3 class="price-name">Gold</h3>
+                            <div class="price-amount">
+                                <span class="price-currency">Rp</span>
+                                <span class="price-value">379</span>
+                            </div>
+                            <div class="price-period">ribu / project</div>
+                        </div>
+                        <ul class="price-features">
+                            <li><i class="fas fa-check-circle"></i> 31-45 Slide</li>
+                            <li><i class="fas fa-check-circle"></i> Animasi Micro-interactions</li>
+                            <li><i class="fas fa-check-circle"></i> Revisi 4x</li>
+                            <li><i class="fas fa-check-circle"></i> Style Guide Included</li>
+                            <li><i class="fas fa-check-circle"></i> Komponen Reusable</li>
+                        </ul>
+                        <a href="https://wa.me/6281524187245?text=Halo,%20saya%20tertarik%20dengan%20Paket%20Gold%20seharga%20Rp%20379.000" class="btn btn-primary price-btn" target="_blank">Pilih Paket</a>
+                    </div>
+                    
+                    <!-- Paket Premium -->
+                    <div class="price-card" data-aos="fade-up" data-aos-delay="400" data-category="premium">
+                        <div class="price-header">
+                            <h3 class="price-name">Premium</h3>
+                            <div class="price-amount">
+                                <span class="price-currency">Rp</span>
+                                <span class="price-value">439</span>
+                            </div>
+                            <div class="price-period">ribu / project</div>
+                        </div>
+                        <ul class="price-features">
+                            <li><i class="fas fa-check-circle"></i> 46-50 Slide</li>
+                            <li><i class="fas fa-check-circle"></i> Animasi Kompleks</li>
+                            <li><i class="fas fa-check-circle"></i> Prioritas Antrian</li>
+                            <li><i class="fas fa-check-circle"></i> Garansi 100%</li>
+                            <li><i class="fas fa-check-circle"></i> Revisi Unlimited</li>
+                        </ul>
+                        <a href="https://wa.me/6281524187245?text=Halo,%20saya%20tertarik%20dengan%20Paket%20Premium%20seharga%20Rp%20439.000" class="btn btn-primary price-btn" target="_blank">Pilih Paket</a>
+                    </div>
+                    
+                    <!-- Paket Pro -->
+                    <div class="price-card enterprise" data-aos="fade-up" data-aos-delay="450" data-category="premium">
+                        <div class="price-header">
+                            <h3 class="price-name">Pro</h3>
+                            <div class="price-amount">
+                                <span class="price-currency">Rp</span>
+                                <span class="price-value">565</span>
+                            </div>
+                            <div class="price-period">ribu / project</div>
+                        </div>
+                        <ul class="price-features">
+                            <li><i class="fas fa-check-circle"></i> 50+ Slide</li>
+                            <li><i class="fas fa-check-circle"></i> Branding Kit</li>
+                            <li><i class="fas fa-check-circle"></i> Siap Develop</li>
+                            <li><i class="fas fa-check-circle"></i> Support Selamanya</li>
+                            <li><i class="fas fa-check-circle"></i> Video Tutorial</li>
+                        </ul>
+                        <a href="https://wa.me/6281524187245?text=Halo,%20saya%20tertarik%20dengan%20Paket%20Pro%20seharga%20Rp%20565.000" class="btn btn-primary price-btn" target="_blank">Pilih Paket</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 50px;">
+                <p style="color: var(--text-light);">Semua paket sudah termasuk file sumber (Figma/Canva) dan konsultasi gratis!</p>
+                <p style="color: var(--text-light); font-size: 0.9rem; margin-top: 10px;">*Kecuali Paket Starter</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="section" style="background: var(--gray-light);">
+        <div class="container">
+            <h2 class="section-title">Pertanyaan yang Sering Diajukan</h2>
+            <p class="section-subtitle">Temukan jawaban untuk pertanyaan yang sering diajukan oleh klien kami.</p>
+            
+            <div class="faq-container">
+                <div class="faq-item" data-aos="fade-up">
+                    <div class="faq-question">
+                        <span>Berapa lama waktu pengerjaan prototipe?</span>
+                        <span class="faq-icon"><i class="fas fa-plus"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Rata-rata pengerjaan berkisar antara 3-7 hari kerja tergantung pada kompleksitas dan paket yang dipilih. Paket Starter, Red, dan Basic biasanya selesai dalam 3-5 hari, sementara paket yang lebih tinggi membutuhkan waktu 5-7 hari.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item" data-aos="fade-up" data-aos-delay="100">
+                    <div class="faq-question">
+                        <span>Apakah ada garansi untuk hasil kerja?</span>
+                        <span class="faq-icon"><i class="fas fa-plus"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Ya! Semua paket dilengkapi dengan garansi. Kami memberikan garansi revisi sesuai paket yang dipilih dan jaminan hasil sesuai dengan brief awal kamu. Jika tidak puas, kami akan revisi hingga kamu puas.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item" data-aos="fade-up" data-aos-delay="200">
+                    <div class="faq-question">
+                        <span>Apakah desain bisa dikembangkan jadi aplikasi asli?</span>
+                        <span class="faq-icon"><i class="fas fa-plus"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Sangat bisa! Kami menggunakan Figma yang merupakan standar industri untuk desain UI/UX. File Figma dapat langsung digunakan oleh developer untuk coding aplikasi asli. Kami juga menyediakan panduan untuk developer jika diperlukan.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item" data-aos="fade-up" data-aos-delay="300">
+                    <div class="faq-question">
+                        <span>Bagaimana proses pengerjaannya?</span>
+                        <span class="faq-icon"><i class="fas fa-plus"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Proses pengerjaan: 1) Konsultasi kebutuhan, 2) Pembayaran dp 50%, 3) Pengerjaan draft pertama, 4) Revisi sesuai paket, 5) Finalisasi dan pengiriman file lengkap, 6) Pembayaran sisanya. Kami selalu update progress via WhatsApp.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item" data-aos="fade-up" data-aos-delay="400">
+                    <div class="faq-question">
+                        <span>Apakah bisa request desain khusus?</span>
+                        <span class="faq-icon"><i class="fas fa-plus"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Tentu! Kami fleksibel dengan kebutuhan klien. Kamu bisa request style, warna, atau komponen tertentu. Untuk permintaan khusus yang kompleks, mungkin ada penyesuaian harga yang akan kami informasikan terlebih dahulu.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <a href="#" class="footer-logo">PROTOTIPE.ID</a>
+                    <p style="color: #cbd5e1; margin-bottom: 20px;">Studio desain UI/UX profesional yang membantu mahasiswa, startup, dan UMKM mewujudkan ide mereka menjadi prototipe aplikasi berkualitas tinggi.</p>
+                    <div style="display: flex; gap: 15px;">
+                        <a href="#" style="color: white; font-size: 1.5rem;"><i class="fab fa-instagram"></i></a>
+                        <a href="#" style="color: white; font-size: 1.5rem;"><i class="fab fa-dribbble"></i></a>
+                        <a href="#" style="color: white; font-size: 1.5rem;"><i class="fab fa-behance"></i></a>
+                        <a href="#" style="color: white; font-size: 1.5rem;"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Layanan</h4>
+                    <ul>
+                        <li><a href="#pricing">Paket Harga</a></li>
+                        <li><a href="#portfolio">Portofolio</a></li>
+                        <li><a href="#problem">Solusi Masalah</a></li>
+                        <li><a href="#pricing">Pemesanan</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Kontak</h4>
+                    <ul>
+                        <li><a href="https://wa.me/6281524187245" target="_blank"><i class="fab fa-whatsapp"></i> +62 815-2418-7245</a></li>
+                        <li><a href="mailto:hello@prototipe.id"><i class="fas fa-envelope"></i> hello@prototipe.id</a></li>
+                        <li><i class="fas fa-clock"></i> Senin - Minggu: 9:00 - 21:00 WIB</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 Prototipe.id - Partner Desain Tepercaya Sejak 2023. Hak Cipta Dilindungi.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Float Button -->
+    <a href="https://wa.me/6281524187245?text=Halo%20Prototipe.id,%20saya%20ingin%20konsultasi%20tentang%20pembuatan%20prototipe%20aplikasi" class="wa-float" target="_blank">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+    </a>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize AOS (Animate On Scroll)
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 100
+        });
+        
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+        
+        // FAQ toggle functionality
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const faqItem = question.parentElement;
+                faqItem.classList.toggle('active');
+                
+                // Close other open FAQs
+                document.querySelectorAll('.faq-item').forEach(item => {
+                    if (item !== faqItem && item.classList.contains('active')) {
+                        item.classList.remove('active');
+                    }
+                });
+            });
+        });
+        
+        // Add floating animation to hero title word
+        const heroTitleWord = document.querySelector('.animate__pulse');
+        setInterval(() => {
+            heroTitleWord.classList.remove('animate__pulse');
+            void heroTitleWord.offsetWidth; // Trigger reflow
+            heroTitleWord.classList.add('animate__pulse');
+        }, 4000);
+        
+        // Pricing tabs functionality
+        document.querySelectorAll('.pricing-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Update active tab
+                document.querySelectorAll('.pricing-tab').forEach(t => {
+                    t.classList.remove('active');
+                });
+                tab.classList.add('active');
+                
+                // Get selected category
+                const category = tab.getAttribute('data-category');
+                
+                // Show/hide packages based on category
+                document.querySelectorAll('.price-card').forEach(card => {
+                    if (category === 'all') {
+                        card.style.display = 'flex';
+                    } else {
+                        const cardCategory = card.getAttribute('data-category');
+                        if (cardCategory === category) {
+                            card.style.display = 'flex';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
